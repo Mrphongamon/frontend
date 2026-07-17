@@ -30,7 +30,7 @@ export default function FormRegister() {
         body: JSON.stringify({
           firstname: form.txt_firstname,
           lastname: form.txt_lastname,
-          username: form.txt_username,
+          username: form.txt_email,
           password: form.txt_password,
         }),
       });
@@ -71,8 +71,8 @@ export default function FormRegister() {
       console.error(error);
       await Swal.fire({
         icon: "error",
-        title: "เกิดข้อผิดพลาด",
-        text: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้",
+        title: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้",
+        text: "กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต แล้วลองใหม่อีกครั้ง",
         confirmButtonText: "ตกลง",
         confirmButtonColor: "#d33",
       });
@@ -80,77 +80,116 @@ export default function FormRegister() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-md border">
-        {/* Header */}
-        <div className="border-b px-6 py-4">
-          <h1 className="text-2xl font-bold text-gray-800">ฟอร์มสมัครสมาชิก</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-xl">
+        <div className="bg-white/90 backdrop-blur rounded-2xl shadow-xl shadow-indigo-100 border border-slate-200 overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 sm:px-8 py-7">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold text-white">
+                  ฟอร์มสมัครสมาชิก
+                </h1>
+                <p className="text-blue-100 text-sm mt-0.5">
+                  กรอกข้อมูลด้านล่างเพื่อสร้างบัญชีผู้ใช้ใหม่
+                </p>
+              </div>
+            </div>
+          </div>
+ 
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className="text-sm font-medium text-slate-700 block mb-1.5">
+                  ชื่อ
+                </label>
+                <input
+                  type="text"
+                  name="txt_firstname"
+                  value={form.txt_firstname}
+                  onChange={handleChange}
+                  className="w-full text-slate-900 border border-slate-300 rounded-lg px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 placeholder:text-slate-400"
+                  placeholder="firstname"
+                  required
+                />
+              </div>
+ 
+              <div>
+                <label className="text-sm font-medium text-slate-700 block mb-1.5">
+                  นามสกุล
+                </label>
+                <input
+                  type="text"
+                  name="txt_lastname"
+                  value={form.txt_lastname}
+                  onChange={handleChange}
+                  className="w-full text-slate-900 border border-slate-300 rounded-lg px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 placeholder:text-slate-400"
+                  placeholder="lastname"
+                  required
+                />
+              </div>
+            </div>
+ 
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1.5">
+                username
+              </label>
+              <input
+                type="email"
+                name="txt_email"
+                value={form.txt_email}
+                onChange={handleChange}
+                className="w-full text-slate-900 border border-slate-300 rounded-lg px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 placeholder:text-slate-400"
+                placeholder="email"
+                required
+              />
+            </div>
+ 
+            <div>
+              <label className="text-sm font-medium text-slate-700 block mb-1.5">
+                password
+              </label>
+              <input
+                type="password"
+                name="txt_password"
+                value={form.txt_password}
+                onChange={handleChange}
+                className="w-full text-slate-900 border border-slate-300 rounded-lg px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 placeholder:text-slate-400"
+                placeholder="password"
+                required
+              />
+            </div>
+ 
+            <div className="pt-3">
+              <button
+                type="submit"
+                className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] transition-all duration-150"
+              >
+                บันทึกข้อมูล
+              </button>
+            </div>
+          </form>
         </div>
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5 flex flex-col">
-          <div>
-            <label className="text-black block mb-2">กรุณาระบุชื่อ</label>
-            <input
-              type="text"
-              name="txt_firstname"
-              value={form.txt_firstname}
-              onChange={handleChange}
-              className="w-full border text-black border-black rounded-md px-4 py-2"
-              placeholder="firstname"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="text-black block mb-2">กรุณาระบุนามสกุล</label>
-            <input
-              type="text"
-              name="txt_lastname"
-              value={form.txt_lastname}
-              onChange={handleChange}
-              className="w-full border text-black border-black rounded-md px-4 py-2"
-              placeholder="lastname"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="text-black block mb-2">username</label>
-            <input
-              type="text"
-              name="txt_username"
-              value={form.txt_username}
-              onChange={handleChange}
-              className="w-full border text-black border-black rounded-md px-4 py-2"
-              placeholder="username"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="text-black block mb-2">password</label>
-            <input
-              type="password"
-              name="txt_password"
-              value={form.txt_password}
-              onChange={handleChange}
-              className="w-full border text-black border-black rounded-md px-4 py-2"
-              placeholder="password"
-              required
-            />
-          </div>
-
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              บันทึกข้อมูล
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   );
 }
+ 
